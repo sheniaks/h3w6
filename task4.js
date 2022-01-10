@@ -5,16 +5,5 @@ const sortString = (str) => {
     arr.sort(sorted);
     return arr.join(' ');
  };
-
-
-
-
-
-
-
-
-
-
-
 console.log(sortString("4of Fo1r pe6ople g3ood th5e the2"));
 
