@@ -124,19 +124,26 @@ class HomeLibrary {
     this.library = this.library.concat(newBook);
   }
   deleteBook(trashBook) {
-    // this.library = this.library.filter(val => val.bookTitle == trashBook);
-    const res = this.library.find((book) => book.bookTitle == trashBook);
-    console.log(res);
-    const i = this.library.indexOf(res);
-    if (i >= 0) {
-     return this.books.splice(i, 1);
-    }
+    this.library = this.library.filter((val) => val.bookTitle !== trashBook);
+    // const res = this.library.find((book) => book.bookTitle == trashBook);
+    // console.log(res);
+    // const i = this.library.indexOf(res);
+    // if (i >= 0) {
+    //  return this.books.splice(i, 1);}
   }
+  // showByYear(year) {
+  //   const res = this.library.find((book) => book.bookYear == year);
+  //   return res
+  //     ? res.bookInfo()
+  //     : `No books for this year, please enter another.`;
+  // }
   showByYear(year) {
-    const res = this.library.find((book) => book.bookYear == year);
-    return res
-      ? res.bookInfo()
-      : `No books for this year, please enter another.`;
+    return (
+      this.library
+        .filter((book) => book.bookYear == year)
+        .map((b) => b.bookInfo())
+        .join(" --- ") || `No books for this year, please enter another.`
+    );
   }
   showByAuthor(author) {
     const res = this.library.find((book) => book.bookAuthor == author);
@@ -176,13 +183,17 @@ let libraryArr = new HomeLibrary([
   new Book("HOW TO TALK TO ANYONE, ANYTIME, ANYWHERE", "Larry King", "1995"),
 ]);
 
-libraryArr.addBook(new Book("You Know JS ", "Kyle Simpson", "2022"));
+libraryArr.addBook([
+  new Book("You Know JS", "Kyle Simpson", "2022"),
+  new Book("Test book 2", "Kyle Simpson", "2022")]
+);
 libraryArr.showLibrary();
 console.log(
   "======================================================================================"
 );
-libraryArr.deleteBook("You Know JS");
-libraryArr.showLibrary();
+console.log(libraryArr.showByYear(2022));
+// libraryArr.deleteBook("You Know JS");
+// libraryArr.showLibrary();
 // console.log(libraryArr.showByYear(1995));
 // console.log(libraryArr.showByYear(2000));
 // console.log(
